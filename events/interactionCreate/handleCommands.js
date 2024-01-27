@@ -1,4 +1,3 @@
-const { devs, testServer } = require('../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 
 
@@ -15,7 +14,7 @@ module.exports = async (client, interaction) => {
         if (!commandObject) return;
 
         if (commandObject.devOnly) {
-            if(!devs.includes(interaction.member.id)) {
+            if(process.env.DEVS !== interaction.member.id) {
                 interaction.reply({
                     content: 'Only developers are allowed to run this command.',
                     ephemeral: true,
@@ -25,7 +24,7 @@ module.exports = async (client, interaction) => {
         }
 
         if (commandObject.testOnly) {
-            if(!interaction.guild.id === testServer) {
+            if(!interaction.guild.id === process.env.TEST_SERVER) {
                 interaction.reply({
                     content: 'This command cannot be ran here.',
                     ephemeral: true,
