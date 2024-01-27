@@ -1,0 +1,4 @@
+.trunk
+config.json
+node_modules
+.env
