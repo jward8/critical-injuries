@@ -47,16 +47,4 @@ module.exports = async (client) => {
         }
 
         for (const commandId of commandsToDelete) {
-            const existingCommand = await applicationCommands.cache.find(
-                (cmd) => cmd.id === commandId
-            );
-
-            if (existingCommand) {
-                await applicationCommands.delete(existingCommand.id);
-                console.log(`♻️ Deleted command "${existingCommand.name}".`);
-            }
-        }
-    } catch (error) {
-        console.error(`Me There was an error: ${error}`);
-    }
-}
+            const existin
