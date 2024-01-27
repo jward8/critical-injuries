@@ -1,6 +1,7 @@
 const areCommandsDifferent = require('../../utils/areCommandsDifferent');
 const getApplicationCommands = require('../../utils/getApplicationCommands');
 const getLocalCommands = require('../../utils/getLocalCommands');
+const { commandsToDelete } = require('../../config.json');
 module.exports = async (client) => {
     try {
         const localCommands = getLocalCommands();
@@ -12,6 +13,7 @@ module.exports = async (client) => {
             const existingCommand = await applicationCommands.cache.find(
                 (cmd) => cmd.name === name
             );
+
 
             if (existingCommand) {
                 if (localCommand.deleted) {
@@ -41,6 +43,17 @@ module.exports = async (client) => {
                 });
 
                 console.log(`Command "${name}" was registered.`);
+            }
+        }
+
+        for (const commandId of commandsToDelete) {
+            const existingCommand = await applicationCommands.cache.find(
+                (cmd) => cmd.id === commandId
+            );
+
+            if (existingCommand) {
+                await applicationCommands.delete(existingCommand.id);
+                console.log(`♻️ Deleted command "${existingCommand.name}".`);
             }
         }
     } catch (error) {

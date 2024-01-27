@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 const { 
     Client,
-    IntentsBitField
+    IntentsBitField,
+    ActivityType
  } = require('discord.js');
 const eventHandler = require('./handlers/eventHandler');
 
@@ -23,6 +24,12 @@ const client = new Client({
 
 
         eventHandler(client);
+
+        client.on('ready', () => {
+            console.log(`Logged in as ${client.user.tag}!`);
+
+            client.user.setActivity('/roll-injury', { type: ActivityType.Watching }) 
+        });
 
         client.login(process.env.DISCORD_TOKEN);
         console.log("Logged in Discord Bot! ...")
