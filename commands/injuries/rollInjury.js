@@ -13,8 +13,7 @@ module.exports = {
         
         const rollEmbed = {
             color: 0x0099ff,
-            title: `${injury.category} - ${injury.injuryType}`,
-            url: 'https://discord.js.org',
+            title: `You rolled a ${randomNumber}! You got ${injury.injuryType}`,
             author: {
                 name: 'Critical Injuries',
                 icon_url: 'https://bg3.wiki/w/images/thumb/2/2f/Shocking_Grasp_Icon.webp/80px-Shocking_Grasp_Icon.webp.png',
